@@ -8,16 +8,21 @@ async function getData() {
   const data = await response.json();
   console.log(data.results);
 
-  triviaQuestions = data.results.map((triviaquestion) => {
-    return {
-      triviaQuestions: triviaquestion.type,
-      difficulty: triviaquestion.difficulty,
-      category: triviaquestion.category,
-      question: triviaquestion.question,
-      correctAnswer: triviaquestion.correct_answer,
-      incorrectAnswers: triviaquestion.incorrect_answers,
-    };
+  content.innerHTML = data.results.map((triviaquestion) => {
+    return `
+        <div class="questionbox">
+        <h2> ${triviaquestion.question} </h2>
+        <p> ${triviaquestion.difficulty} </p>
+        <p> correct answer: ${triviaquestion.correct_answer} <p>
+        <p> incorrect answer: ${triviaquestion.incorrect_answers} </p>
+        </div>    
+    
+    `;
   });
 }
 
 getData();
+
+// fetcher bare data her foreløpig, har tenkt til å fortsette med siden,
+// buttons for multiple choice med sjekk for svarene
+// legge til en meny for valg av kategori
